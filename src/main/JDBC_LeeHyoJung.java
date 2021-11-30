@@ -53,14 +53,21 @@ public class JDBC_LeeHyoJung {
 
     }
 
+<<<<<<< HEAD
     // item, likeditem, user, location
+=======
+>>>>>>> main
     public static void showLikedItemAroundArea(String id, String city, String district, String dong){
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/hyojung?useUnicode=true&useJDBCCompliantTimezoneShift=true&"
                     + "useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "root");
 
             // user10 , 안양시 만안구 석수2동
+<<<<<<< HEAD
             PreparedStatement pStmt= conn.prepareStatement("select a.item_name, a.price, a.seller_id from item as a, likeditem as liked where liked.user_id= ? and a.item_id = liked.item_id and a.item_id in (select b.item_id from item as b where b.seller_id in (select user.user_id from user where location_id=(select location_id from location where city= ? and district= ? and eup_dong= ? )))");
+=======
+            PreparedStatement pStmt= conn.prepareStatement("select a.item_name as king, a.price, a.seller_id from item as a, likeditem as liked where liked.user_id= ? and a.item_id = liked.item_id and a.item_id in (select b.item_id from item as b where b.seller_id in (select user.user_id from user where location_id=(select location_id from location where city= ? and district= ? and eup_dong= ? )))");
+>>>>>>> main
             pStmt.setString(1, id);
             pStmt.setString(2, city);
             pStmt.setString(3, district);
@@ -86,7 +93,11 @@ public class JDBC_LeeHyoJung {
                     + "useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "root");
 
             // 서울시 동작구 흑석동, 거래 완료
+<<<<<<< HEAD
             PreparedStatement pStmt= conn.prepareStatement("select u.nickname as username, count(h.item_id) as num from dealhistory as h, user as u where h.user_id=u.user_id and u.location_id=(select location_id from location where city= ? and district= ? and eup_dong= ?) and h.transaction_state= ? group by username order by num DESC");
+=======
+            PreparedStatement pStmt= conn.prepareStatement("select u.nickname as username, count(h.item_id) as num from dealhistory as h, user as u where h.user_id=u.user_id and u.location_id=(select location_id from location where city= ? and district= ? and eup_dong= ?) and h.transaction_state= ? group by username");
+>>>>>>> main
             pStmt.setString(1, city);
             pStmt.setString(2, district);
             pStmt.setString(3, dong);

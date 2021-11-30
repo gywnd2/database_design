@@ -21,31 +21,18 @@ where freeboard.user_id in (select user.user_id
                                                         where eup_dong="석수2동"))
 
 select a.item_name, a.price, a.seller_id
-from item as a, likeditem as liked
-where liked.user_id="user8" and
-        a.item_id = liked.item_id and
-        a.item_id in (select b.item_id
+from item as a
+where a.item_id in (select b.item_id
                         from item as b
-                        where b.seller_id in (select user.user_id
+                        where b.seller_id in (select user_id
                                                 from user
                                                 where location_id=(select location_id
                                                                     from location
-                                                                    where city="안양시" and
-                                                                        district="만안구" and
-                                                                        eup_dong="석수2동")))
+                                                                    where city="안양시"
+                                                                        district="만안구"
+                                                                        eup_dong="석수2동")))\
 
-select u.nickname as username, count(h.item_id) as num
-from dealhistory as h, user as u
-where h.user_id=u.user_id and u.location_id=(select location_id
-                                            from location
-                                            where city="안양시" and
-                                                district="만안구" and
-                                                eup_dong="석수2동")
-                        and h.transaction_state="거래 완료"
-group by username
-order by username DESC
-
-select user_id
-from history
-where seller_id="userexample"
-group by user_id
+select transaction_state, count(item_id) as num
+from dealhistory
+where user_id="userexample"
+group by transaction_state
