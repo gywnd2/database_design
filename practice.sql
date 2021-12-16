@@ -35,6 +35,7 @@ where a.item_id in (select b.item_id
 select transaction_state, count(item_id) as num
 from dealhistory
 where user_id="userexample"
+<<<<<<< HEAD
 group by transaction_state
 
 create trigger setnull_trigger before update of takes
@@ -296,3 +297,6 @@ begin atomic
     where course.course_id=nrow.course_id)
     where student.id=nrow.id;
 end;
+=======
+group by transaction_state
+>>>>>>> main
